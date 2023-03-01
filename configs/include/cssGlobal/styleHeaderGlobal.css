@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --primary-color : #022642;
+    --cyan-color : cyan;
+    --fontfamily-primary : 'Oswald', sans-serif;
+}
+
+body{
+    font-family: 'Numans', sans-serif !important;
+}
+.bg-body-tertiary{
+    background-color:#fff !important;
+}
+
+.my-logo{
+    max-width: 20%;
+}
+
+.nav-link{
+    text-transform: uppercase;
+}
+
+.active{
+    font-weight: bold;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+.my-title{
+    overflow-y: hidden;
+}
+.img-fluid-header {
+    width: 80px;
+}
+.navbar{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: #022642 !important;
+    border-radius: unset !important;
+    border-bottom: 1px solid rgba(0, 255, 255, 0.4);
+    z-index: 999;
+}
+.testscrool{
+    min-height: 1000px;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: #fff;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    display: inline-block;
+    
+}
+.navbar-expand-lg .navbar-nav .nav-link:hover {
+    text-shadow: red -2px 0,cyan 2px 0;
+ 
+}
+.form-control{
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    width: 93px;
+    transition: 0.5s;
+}
+.btn.btn-outline-success:hover{
+    box-shadow: red -2px 0,cyan 2px 0;
+}
+.btn-search{
+    border: 1px solid #fff;
+    color: white;
+    background: transparent;
+    border-radius: 5px;
+    width: 50px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 300;
+    transition: 0.5s;
+}
+.btn-search:hover{
+    transition: 0.3s;
+    box-shadow: 0px 2px 24px cyan;
+   
+}
+.form-control:focus {
+    width: 190px;
+    box-shadow: 0 2px 18px rgba(0, 255, 255, 0.4);
+}
+
+
+
+button.navbar-toggler.navbar-toggler_2 {
+    background-color: #fff;
+}
+
+.navbar-toggler:focus{
+    transition: 0.3s;
+    box-shadow: 0px 2px 24px cyan;
+}
+.carousel{
+    margin-top: 112px;
+}
+button.navbar-toggler.navbar-toggler_2.collapsed{
+    box-shadow: unset;
+
+}
+h4.text-center.text-uppercase.fw-bold {
+    color: #fff;
+    font-size: 25px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Set height to 100% of viewport height */
+  }
+main{
+    flex: 1; /*Để lúc nào footer cũng nằm phía dưới*/
+}
+
+

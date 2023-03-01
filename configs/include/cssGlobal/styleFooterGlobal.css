@@ -1,0 +1,9 @@
+
+footer.bg-white.d-flex.justify-content-center.align-items-center.border-top.border-secondary.border-2 {
+    width: 100%;
+    background-color: var(--primary-color) !important;
+    color: #fff;
+    font-family: var(--fontfamily-primary);
+    padding: 10px 0;
+    margin-top: 10px;
+}
