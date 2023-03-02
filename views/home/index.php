@@ -1,5 +1,5 @@
 <?php
-    require 'include\header_global.php';
+    require 'configs/include/header_global.php';
 ?>
 
 
