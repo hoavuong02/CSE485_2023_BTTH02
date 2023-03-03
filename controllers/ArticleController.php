@@ -11,6 +11,8 @@ class ArticleController{
     public function detail(){
         $serviceDetail = new ArticleService();
         $detailArticle = $serviceDetail->getDetailArticle();
+        $nameCategory = $serviceDetail->getCategorybyArticle($detailArticle->getMaTheLoai());
+        $nameAuthor = $serviceDetail->getAuthorbyArticle($detailArticle->getMaTacGia());
         include("views/article/detail_article.php");
     }
 
@@ -20,10 +22,5 @@ class ArticleController{
         include("views/article/search_article.php");
     }
 
-    public function list(){
-        // Nhiệm vụ 1: Tương tác với Services/Models
-        // echo "Tương tác với Services/Models from Article";
-        // Nhiệm vụ 2: Tương tác với View
-        include("views/article/list_article.php");
-    }
+    
 }

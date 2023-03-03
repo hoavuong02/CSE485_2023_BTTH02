@@ -2,19 +2,19 @@
 define('APP_ROOT', dirname(__FILE__, 2));  
 include("configs/DBConnection.php");
 include("models/Article.php");
+include("models/Category.php");
 class ArticleService{
-    public function getAllArticles(){
-        // 4 bước thực hiện
-       $dbConn = new DBConnection();
-       $conn = $dbConn->getConnection();
 
-        // B2. Truy vấn
+    public function getAllArticles(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+
         $sql = "SELECT * FROM baiviet INNER JOIN theloai ON theloai.ma_tloai=baiviet.ma_tloai INNER JOIN tacgia ON tacgia.ma_tgia=baiviet.ma_tgia";
         $stmt = $conn->query($sql);
 
         $articles = [];
         while($row = $stmt->fetch()){
-            $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ten_tloai'], $row['ten_tgia']);
+            $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ma_tloai'], $row['ma_tgia']);
             array_push($articles,$article);
         }
         // Mảng (danh sách) các đối tượng Article Model
@@ -23,26 +23,46 @@ class ArticleService{
     }
 
     public function getDetailArticle(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
         $id = $_GET['id'];
-
-       $dbConn = new DBConnection();
-       $conn = $dbConn->getConnection();
-
         // B2. Truy vấn
         $sql = "SELECT * FROM baiviet INNER JOIN theloai ON theloai.ma_tloai=baiviet.ma_tloai INNER JOIN tacgia ON tacgia.ma_tgia=baiviet.ma_tgia WHERE baiviet.ma_bviet = $id";
         $stmt = $conn->query($sql);
         $row = $stmt->fetch();
-        $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ten_tloai'], $row['ten_tgia']);
+        $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ma_tloai'], $row['ma_tgia']);
 
         return $article;
     }
 
-    public function getSearchedArticles(){
-        $infoSearch= $_POST['search'];
-
-       $dbConn = new DBConnection();
-       $conn = $dbConn->getConnection();
+    public function getCategorybyArticle($id){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
         // B2. Truy vấn
+        $sql = "SELECT * FROM theloai  WHERE ma_tloai = $id";
+        $stmt = $conn->query($sql);
+        $row = $stmt->fetch();
+        $category = new Category($row['ma_tloai'], $row['ten_tloai']);
+
+        return $category;
+    }
+
+    public function getAuthorbyArticle($id){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+        // B2. Truy vấn
+        $sql = "SELECT * FROM tacgia  WHERE ma_tgia = $id";
+        $stmt = $conn->query($sql);
+        $row = $stmt->fetch();
+        $author = new Author($row['ma_tgic'], $row['ten_tgia']);
+
+        return $author;
+    }
+
+    public function getSearchedArticles(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+        $infoSearch= $_POST['search'];
         $sql = "SELECT * FROM baiviet 
         INNER JOIN theloai on theloai.ma_tloai = baiviet.ma_tloai
         INNER JOIN tacgia on tacgia.ma_tgia = baiviet.ma_tgia 
@@ -55,7 +75,7 @@ class ArticleService{
 
         $articles = [];
         while($row = $stmt->fetch()){
-            $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ten_tloai'], $row['ten_tgia']);
+            $article = new Article($row['ma_bviet'], $row['tieude'], $row['ten_bhat'], $row['tomtat'], $row['noidung'], $row['hinhanh'], $row['ma_tloai'], $row['ma_tgia']);
             array_push($articles,$article);
         }
         // Mảng (danh sách) các đối tượng Article Model
@@ -64,6 +84,8 @@ class ArticleService{
     }
 
     public function addArticle($tieude, $ten_bhat, $ma_tloai, $tomtat, $noidung, $ma_thloai, $ma_tgia){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
         
         $upload_path   = APP_ROOT.'/assets/images/songs/';
 
@@ -91,11 +113,6 @@ class ArticleService{
         }
 
 
-        // 4 bước thực hiện
-       $dbConn = new DBConnection();
-       $conn = $dbConn->getConnection();
-
-        // B2. Truy vấn
         $sql = "INSERT INTO `baiviet` (`ma_bviet`, `tieude`, `ten_bhat`, `ma_tloai`, `tomtat`, `noidung`, `ma_tgia`, `ngayviet`, `hinhanh`)
            VALUES (NULL, '$tieude', '$ten_bhat', '$ma_tloai', '$tomtat', '$noidung', '$ma_tgia', current_timestamp(), '$destination')";
         $stmt = $dbConn->getConnect()->prepare($sql);
