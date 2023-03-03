@@ -1,3 +1,8 @@
+<?php
+    if(isset($_POST['submit_search'])) {
+        $infoSearch= $_POST['search'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music for Life</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="./include/cssGlobal/styleHeaderGlobal.css">
-    <link rel="stylesheet" href="./include/cssGlobal/styleFooterGlobal.css">
+    <link rel="stylesheet" href="configs/include/cssGlobal/styleHeaderGlobal.css">
+    <link rel="stylesheet" href="configs/include/cssGlobal/styleFooterGlobal.css">
 </head>
 <body>
     <header>
@@ -15,7 +20,7 @@
             <div class="container-fluid">
                 <div class="my-logo">
                     <a class="navbar-brand" href="#">
-                        <img src="./images/logoPrimary.png" alt="" class="img-fluid-header">
+                        <img src="assets/images/logoPrimary.png" alt="" class="img-fluid-header">
                     </a>
                 </div>
                 <button class="navbar-toggler navbar-toggler_2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +35,7 @@
                     <a class="nav-link" href="index.php?controller=login&action=index">Đăng nhập</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search" method="GET" action="">
+                <form class="d-flex" role="search" method="POST" action="index.php?controller=article&action=search">
                     <input class="form-control me-2" type="search" placeholder="Nội dung cần tìm" aria-label="Search" name="search">
                     <input class="btn-search" type="submit" name="submit_search" value="Tìm">
                 </form>
