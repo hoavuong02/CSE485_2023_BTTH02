@@ -53,6 +53,11 @@ class User{
         $this->admin = $admin;
     }
 
+    public function isAdmin(){
+        if($this->admin==1){
+            return TRUE;
+        }
+    }
 
 }
 ?>
