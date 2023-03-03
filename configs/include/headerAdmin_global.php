@@ -38,7 +38,7 @@
                         <a class="nav-link" href="../../index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Category/category.php">Thể loại</a>
+                        <a class="nav-link" href="index.php?controller=category&&action=showAllCategory">Thể loại</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="../Author/author.php">Tác giả</a>

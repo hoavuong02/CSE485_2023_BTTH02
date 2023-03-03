@@ -1,5 +1,5 @@
 <?php
-    require 'include\header_global.php';
+      require 'configs/include/headerAdmin_global.php';
 ?>
 
 
@@ -105,5 +105,5 @@
         </div>    
     </main>
 <?php
-    require 'include\footer_global.php';
+    require 'configs/include/footerAdmin_global.php';
 ?>
