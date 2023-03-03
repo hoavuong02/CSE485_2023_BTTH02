@@ -8,10 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style_login.css">
-
-    <style>
-        
-    </style>
 </head>
 <body>
     <!-- <header>
@@ -48,7 +44,7 @@
         <div class="d-flex justify-content-center h-100 card2">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Sign In</h3>
+                        <h3>Sign Up</h3>
                         <div class="d-flex justify-content-end social_icon">
                             <span><i class="fab fa-facebook-square"></i></span>
                             <span><i class="fab fa-google-plus-square"></i></span>
@@ -56,38 +52,29 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="index.php?controller=login&action=processLogin" method = "post">
+                        <form action="index.php?controller=signUp&action=processSignUp" method = "post">
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtUser"><i class="fas fa-user"></i></span>
-                                <input type="text" class="form-control" placeholder="username" name="txtUser" value="<?php if(isset($_COOKIE["username"])) { echo $_COOKIE["username"]; } ?>">
+                                <input type="text" class="form-control" placeholder="username" name="txtUser">
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
-                                <input type="text" class="form-control" placeholder="password" name="txtPassword" value="<?php if(isset($_COOKIE["password"])) { echo $_COOKIE["password"]; } ?>">
+                                <input type="password" class="form-control" placeholder="password" name="txtPassword">
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="txtPass"><i class="fas fa-key"></i></span>
+                                <input type="email" class="form-control" placeholder="email" name="txtEmail">
                             </div>
                             
-                            <div class="row align-items-center remember">
-                                <input type="checkbox" name="remember">Remember Me
-                            </div>
                             <div class="form-group">
-                                <input type="submit" value="Login" class="btn float-end login_btn">
+                                <input type="submit" value="SignUp" class="btn float-end login_btn">
                             </div>
                         </form>
-                        <?php
-                            if(isset($_GET['error'])){
-                                echo "<h2 style='color:red;font-size: 19px;text-shadow: 0 1px 2px black;  margin-top: 47px;margin-left: 77px;'>{$_GET['error']}</h2>";
-                            }
-                        ?>
+                       
                     </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-center ">
-                            Don't have an account?<a href="index.php?controller=signUp&action=index" class="text-warning text-decoration-none">Sign Up</a>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" class="text-warning text-decoration-none">Forgot your password?</a>
-                        </div>
-                    </div>
+                    
                 </div>
 
         </div>

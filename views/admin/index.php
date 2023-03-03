@@ -1,17 +1,16 @@
 <?php
-    session_start();
     if(!isset($_SESSION["user"])){
-    header("Location: ../login.php");
+    header("Location: index.php?controller=login&naction=index");
     exit(); }
-    require '..\configs\include\DBConnection.php';
+
     $userName = $_SESSION['user'];
-    $sql = "SELECT admin FROM `user` WHERE ten_dnhap='$userName'";
-    $result = mysqli_query($conn, $sql);        
-    $isAdmin =0;
-    if(mysqli_num_rows($result) > 0){
-        $row = mysqli_fetch_assoc($result);
-        $isAdmin = $row['admin'];
-    }
+    // $sql = "SELECT admin FROM `user` WHERE ten_dnhap='$userName'";
+    // $result = mysqli_query($conn, $sql);        
+    // $isAdmin =0;
+    // if(mysqli_num_rows($result) > 0){
+    //     $row = mysqli_fetch_assoc($result);
+    //     $isAdmin = $row['admin'];
+    // }
 
 
     
@@ -72,7 +71,7 @@
                 </div>
                 <div>
                 <button type="button" class="btn btn-primary">
-                    <a class="nav-link" href="../logout.php">Đăng xuất</a>
+                    <a class="nav-link" href="index.php?controller=logout&action=index">Đăng xuất</a>
 
                 </button>
                     
@@ -86,9 +85,9 @@
     <main class="container mt-5 mb-5">
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <?php
-            if($isAdmin !=1){  ?>
+             if($checkAdmin->getAdmin()!=1){  ?>
                 <div class="alert alert-warning">
-                    <strong>Cảnh báo!</strong> Chỉ có admin mới có thể truy cập vào mục <strong>Người dùng</strong>.
+                     <strong>Cảnh báo!</strong> Chỉ có admin mới có thể truy cập vào mục <strong>Người dùng</strong>.
                 </div>
         <?php    }
         ?>
@@ -98,8 +97,8 @@
                     <div class="card-body">
                         <h5 class="card-title text-center">
                             <?php 
-                                if($isAdmin ==1){
-                                    echo "<a href='../admin/User/user.php' class='text-decoration-none'>Người dùng</a>";
+                                if($checkAdmin->getAdmin() ==1){
+                                    echo "<a href='index.php?controller=user&action=index' class='text-decoration-none'>Người dùng</a>";
                                 } else {
                                     echo "<a href='#' class='text-decoration-none'>Người dùng</a>";
                                 }
@@ -108,12 +107,9 @@
                         </h5>
 
                         <h5 class="h1 text-center">
-                            <?php
-                                $sql = "SELECT COUNT(user.ten_dnhap) FROM `user` ";
-                                $result = mysqli_query($conn, $sql);        
-                                if(mysqli_num_rows($result) > 0){
-                                    $row = mysqli_fetch_assoc($result);
-                                    echo $row['COUNT(user.ten_dnhap)'];
+                            <?php                                     
+                                if($userCount > 0){                                
+                                    echo $userCount;
                                 }
                             ?>
                         
