@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm">
                 <h3 class="text-center text-uppercase fw-bold">Thêm mới thể loại</h3>
-                <form action="process_add_user.php" method="post">
+                <form action="index.php?controller=user&action=processAdd" method="post">
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lbUserName">Tên Đăng Nhập</span>
                         <input type="text" class="form-control" name="txtUserName" >
@@ -29,7 +29,7 @@
             
                     <div class="form-group  float-end ">
                         <input type="submit" value="Thêm" class="btn btn-success">
-                        <a href="index.php?controller=user&action=showAllUser" class="btn btn-warning ">Quay lại</a>
+                        <a href="index.php?controller=user&action=index" class="btn btn-warning ">Quay lại</a>
                     </div>
                 </form>
             </div>

@@ -22,6 +22,37 @@
             return $users;
         }
 
+        public function processAddUser(){
+ 
+            $conn = new DBConnection();
+            $txtUserName= $_POST['txtUserName'];
+            $txtUserPass= $_POST['txtUserPass'];
+            $txtUserEmail= $_POST['txtUserEmail'];
+            $txtUserAdmin= $_POST['txtUserAdmin'];           
+            $addUserSql = "INSERT INTO user(ten_dnhap,mat_khau,email,ngay_dki,admin) VALUES ('$txtUserName','$txtUserPass','$txtUserEmail',current_timestamp(), '$txtUserAdmin')";
+            $stmt = $conn->getConnection()->prepare($addUserSql);
+            if($stmt->execute()){
+                header("Location: index.php?controller=user&action=index");
+    
+              echo "OK";
+            }
+            
+          
+          
+            
+          
+          
+          //Thực thi câu lệnh
+          
+              if(mysqli_query($conn,$addUserSql)){ //conn để kết nối csdl bên file ketnoi
+                  header("Location: user.php");
+                  // echo mysqli_query($conn,$addUserSql);
+                  echo "OK";
+              }
+            
+            
+         }
+
         public function selectEditUser(){
             // Bước 01: Kết nối DB Server
             //require db
@@ -48,7 +79,9 @@
             $updateUserSql = "UPDATE user SET mat_khau = '$password', email = '$email', admin = '$admin' WHERE ten_dnhap =  '$userName'";
             $stmt = $conn->getConnection()->prepare($updateUserSql);
             $stmt->execute();
-            
+            if($stmt->execute()){
+                header("Location: index.php?controller=user&action=index");
+            }
 
             
             
@@ -63,11 +96,9 @@
             $deleteCategorySql = "DELETE FROM user WHERE ten_dnhap = '$getId'  ";
             $stmt = $conn->getConnection()->prepare( $deleteCategorySql);
             $stmt->execute();
-            echo $stmt->execute();
             // Bước 03: Trả về dữ liệu
-            
             if($stmt->execute()){
-                header("Location: user.php");
+                header("Location: index.php?controller=user&action=index");
             }
             
             

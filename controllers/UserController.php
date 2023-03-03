@@ -14,11 +14,14 @@ class UserController{
         
     //     include("views/user/user.php");
     // }
-    public function add(){
-        // Tương tác với Services/Models
-        //$categories= 'Categories from ArticeServices';
-        // Tương tác với View
-        include("views/user/add_user.php");
+    public function Add(){
+       include("views/user/add_user.php");
+    }
+
+    public function processAdd(){
+        $userService = new UserService();
+        $processAdd = $userService-> processAddUser();
+       // include("views/user/add_user.php");
     }
 
     public function edit(){
@@ -29,14 +32,14 @@ class UserController{
 
     public function processEdit(){
         $userService = new UserService();
-        $processEditUser = $userService-> processEditUser();
-        include("views/user/user.php");
+        $processEdit = $userService-> processEditUser();
+        
     }
 
     public function delete(){
         $userService = new UserService();
         $userDelete = $userService-> deleteUser();
-        include("views/user/add_user.php");
+        //include("views/user/user.php");
         
     }
 }

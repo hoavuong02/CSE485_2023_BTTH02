@@ -61,7 +61,7 @@
                     </thead>
                     
                         <tbody>
-                        <?php $index = 1;foreach($users as $row) {?>       
+                        <?php $index = 1;foreach($users as $row) { ?>       
                                 <tr>
                                     <th scope="row"><?= $index++;  ?></th>
                                     <td><?= $row->getTenDangNhap();?></td>
