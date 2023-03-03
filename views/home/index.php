@@ -1,5 +1,5 @@
 <?php
-      require 'configs/include/headerAdmin_global.php';
+    require 'configs/include/header_global.php';
 ?>
 
 
