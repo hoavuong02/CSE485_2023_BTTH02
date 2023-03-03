@@ -42,10 +42,38 @@ class CategoryService{
             $addnameCategorySql = "INSERT INTO theloai(ten_tloai) VALUES ('$nameCategory')";
             $stmt = $conn->prepare($addnameCategorySql);
             $stmt->execute();
+            
+        }
 
+        public function deleteCategorySql(){
             
-                // header("Location: index.php?controller=category");
+            // $getId =  $_GET['id'];
+            // return $nameCategory;
             
+            $dbConn = new DBConnection();
+            $conn = $dbConn->getConnection();
+
+            // $delCategorySql = "DELETE FROM theloai WHERE ma_tloai = $getId";
+            // $stmt = $conn->prepare($delCategorySql);
+            // $stmt->execute();
+
+            $sql2 = "SELECT * FROM theloai";
+            $stmt2 = $conn->prepare($sql2);
+            $stmt2->execute();
+
+            $found = false;
+            $categorys1 = [];
+            while ($row = $stmt2->fetch()) {
+                $category = new Category($row['ma_tloai'], $row['ten_tloai']);
+                array_push($categorys1,$category); //add category vào mảng
+            }
+
+            // print_r($categorys1);
+
+            foreach($categorys1 as $value){
+                // print_r($value->getten_tloai());
+            }
+
         }
 
         

@@ -9,18 +9,25 @@ class CategoryController{
         $categoryService = new CategoryService();
         $categorys = $categoryService-> getAllCategory();
         include("views/category/category.php");
+        // header("Location: index.php?controller=category");
     }
 
     
    
     public function add(){
-        $categoryService1 = new CategoryService();
-        $nameCategory = $categoryService1 -> addCategorySql();
+        $categoryService = new CategoryService();
+        $nameCategory = $categoryService -> addCategorySql();
         header("Location: index.php?controller=category");
     }
 
     public function Routeradd(){
         include("views/category/add_category.php");
+    }
+
+    public function delete(){
+        $categoryService = new CategoryService();
+        $delcategory = $categoryService -> deleteCategorySql();
+        // header("Location: index.php?controller=category");
     }
 
 }
