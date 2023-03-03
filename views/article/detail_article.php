@@ -1,5 +1,4 @@
 <?php
-    define('APP_ROOT', dirname(__FILE__, 3));  
     require APP_ROOT.'\configs\include\header_global.php';
 ?>
 <main class="container mt-5" style="margin-top:200px!important" >

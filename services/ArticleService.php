@@ -1,5 +1,5 @@
 <?php
-define('APP_ROOT', dirname(__FILE__, 3));  
+define('APP_ROOT', dirname(__FILE__, 2));  
 include("configs/DBConnection.php");
 include("models/Article.php");
 class ArticleService{

@@ -1,5 +1,4 @@
 <?php
-    define('APP_ROOT', dirname(__FILE__, 3));  
     require APP_ROOT.'\configs\include\header_global.php';
 ?>
 
