@@ -13,7 +13,7 @@ class CategoryController{
     }
 
     
-   
+   //add
     public function add(){
         $categoryService = new CategoryService();
         $nameCategory = $categoryService -> addCategorySql();
@@ -24,11 +24,27 @@ class CategoryController{
         include("views/category/add_category.php");
     }
 
+    //delete
     public function delete(){
         $categoryService = new CategoryService();
         $delcategory = $categoryService -> deleteCategorySql();
         // header("Location: index.php?controller=category");
     }
+
+    //edit
+
+    public function Routeredit(){
+        $categoryService = new CategoryService();
+        $editCategoryId = $categoryService ->editCategorySql();
+        include("views/category/edit_category.php");
+    }
+
+    public function edit(){
+        $categoryService = new CategoryService();
+        $processCategory =  $categoryService ->processEditCategory();
+        header("Location: index.php?controller=category");
+    }
+
 
 }
 // echo "đây là ArticleController";

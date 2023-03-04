@@ -1,12 +1,35 @@
 
+<?php ?>
+
+ <script>
+        //  document.querySelector(".alert");
+        setTimeout(function(){
+            document.querySelector(".alert").style.display = "none";
+        },5000)
+ </script>
+<?php ?>
+
+
 
 <?php
     // require '../../auth.php';
     require 'configs/include/headerAdmin_global.php';
 ?>
 
-<?php print_r($categorys1);  ?>
+
     <main class="container mt-5 mb-5">
+
+    <?php
+                if(isset($_GET['success'])){
+                ?>
+                <div class="container mt-3">
+                   <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        <strong>Success!</strong> <?= $_GET['success'] ?>
+                    </div>
+                </div>
+    <?php  }   ?>
+
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
@@ -26,7 +49,7 @@
                             <th scope="row"><?= $index++;  ?></th>
                             <td><?= $category->getten_tloai(); ?></td>
                             <td>
-                                <a href="edit_category.php?id=<?= $category->getma_tloai(); ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="index.php?controller=category&&action=Routeredit&id=<?=$category->getma_tloai(); ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
                                 <a onclick = "return confirm('Bạn có chắc chắn muốn xóa thể loại <?=$category->getten_tloai();?>?');"  href="index.php?controller=category&&action=delete&id=<?=$category->getma_tloai(); ?>" > <i class="fa-solid fa-trash"></i> </a>
