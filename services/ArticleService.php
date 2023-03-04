@@ -19,7 +19,6 @@ class ArticleService{
             array_push($articles,$article);
         }
         // Mảng (danh sách) các đối tượng Article Model
-
         return $articles;
     }
 
@@ -309,5 +308,8 @@ class ArticleService{
         // Mảng (danh sách) các đối tượng Article Model
 
         return $authors;
+
+       
     }
+    
 }

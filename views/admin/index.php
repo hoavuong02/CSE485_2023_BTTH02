@@ -1,19 +1,8 @@
 <?php
     if(!isset($_SESSION["user"])){
-    header("Location: index.php?controller=login&naction=index");
-    exit(); }
-
-    $userName = $_SESSION['user'];
-    // $sql = "SELECT admin FROM `user` WHERE ten_dnhap='$userName'";
-    // $result = mysqli_query($conn, $sql);        
-    // $isAdmin =0;
-    // if(mysqli_num_rows($result) > 0){
-    //     $row = mysqli_fetch_assoc($result);
-    //     $isAdmin = $row['admin'];
-    // }
-
-
-    
+        header("Location: index.php?controller=login&action=index");
+        exit(); }
+    $userName = $_SESSION['user']; 
 ?>
 
 <!DOCTYPE html>
@@ -52,19 +41,19 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active fw-bold" aria-current="page" href="./">Trang chủ</a>
+                        <a class="nav-link active fw-bold" aria-current="page" href="index.php?controller=admin&&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/Category/category.php">Thể loại</a>
+                        <a class="nav-link" href="index.php?controller=category&action=index">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/Author/author.php">Tác giả</a>
+                        <a class="nav-link" href="index.php?controller=author&action=index">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/Article/article.php">Bài viết</a>
+                        <a class="nav-link" href="index.php?controller=article&&action=list">Bài viết</a>
                     </li>
                     
                 </ul>
@@ -122,16 +111,13 @@
                 <div class="card mb-2" style="width: 100%;">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="../admin/Category/category.php" class="text-decoration-none">Thể loại</a>
+                            <a href="index.php?controller=category&action=index" class="text-decoration-none">Thể loại</a>
                         </h5>
 
                         <h5 class="h1 text-center">
                         <?php
-                                $sql = "SELECT COUNT(theloai.ma_tloai) FROM theloai;";
-                                $result = mysqli_query($conn, $sql);        
-                                if(mysqli_num_rows($result) > 0){
-                                    $row = mysqli_fetch_assoc($result);
-                                    echo $row['COUNT(theloai.ma_tloai)'];
+                                if($categoryCount > 0){                                
+                                    echo $categoryCount;
                                 }
                             ?>
                         </h5>
@@ -143,16 +129,13 @@
                 <div class="card mb-2" style="width: 100%;">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="../admin/Author/author.php" class="text-decoration-none">Tác giả</a>
+                            <a href="index.php?controller=author&action=index" class="text-decoration-none">Tác giả</a>
                         </h5>
 
                         <h5 class="h1 text-center">
                         <?php
-                                $sql = "SELECT COUNT(tacgia.ma_tgia) FROM tacgia;";
-                                $result = mysqli_query($conn, $sql);        
-                                if(mysqli_num_rows($result) > 0){
-                                    $row = mysqli_fetch_assoc($result);
-                                    echo $row['COUNT(tacgia.ma_tgia)'];
+                                if($authorCount > 0){                                
+                                    echo $authorCount;
                                 }
                             ?>
                         </h5>
@@ -164,16 +147,13 @@
                 <div class="card mb-2" style="width: 100%;">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="../admin/Article/article.php" class="text-decoration-none">Bài viết</a>
+                            <a href="index.php?controller=article&action=list" class="text-decoration-none">Bài viết</a>
                         </h5>
 
                         <h5 class="h1 text-center">
                         <?php
-                                $sql = "SELECT COUNT(baiviet.ma_bviet) FROM baiviet; ";
-                                $result = mysqli_query($conn, $sql);        
-                                if(mysqli_num_rows($result) > 0){
-                                    $row = mysqli_fetch_assoc($result);
-                                    echo $row['COUNT(baiviet.ma_bviet)'];
+                                if($articleCount > 0){                                
+                                    echo $articleCount;
                                 }
                             ?>
                         </h5>
@@ -183,5 +163,5 @@
         </div>
     </main>
     <?php
-     require '../include/footerAdmin_global.php';
+     require 'configs/include/footerAdmin_global.php';
 ?>

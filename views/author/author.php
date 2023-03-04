@@ -1,4 +1,6 @@
-
+<?php
+     require 'configs/include/auth.php';
+?>
 <?php ?>
 
  <script>

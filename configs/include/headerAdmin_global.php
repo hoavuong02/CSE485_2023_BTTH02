@@ -35,16 +35,16 @@
                         <a class="nav-link active fw-bold" aria-current="page" href="index.php?controller=admin&action=index">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.php">Trang ngoài</a>
+                        <a class="nav-link" href="index.php">Trang ngoài</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?controller=category&&action=showAllCategory">Thể loại</a>
+                        <a class="nav-link" href="index.php?controller=category&&action=index">Thể loại</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Author/author.php">Tác giả</a>
+                        <a class="nav-link" href="index.php?controller=author&action=index">Tác giả</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Article/article.php">Bài viết</a>
+                        <a class="nav-link" href="index.php?controller=article&action=list">Bài viết</a>
                     </li>
                 </ul>
                 </div>

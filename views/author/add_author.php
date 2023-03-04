@@ -1,4 +1,7 @@
 <?php
+     require 'configs/include/auth.php';
+?>
+<?php
     // require '../../auth.php';
     require 'configs/include/headerAdmin_global.php';
 ?>

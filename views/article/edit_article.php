@@ -1,4 +1,7 @@
 <?php
+     require 'configs/include/auth.php';
+?>
+<?php
     require APP_ROOT.'\configs\include\headerAdmin_global.php';
 ?>
 

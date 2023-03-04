@@ -143,9 +143,9 @@
             $conn = new DBConnection();           
             $countUserSql = "SELECT COUNT(user.ten_dnhap)  FROM `user` ";
             $stmt = $conn->getConnection()->prepare($countUserSql);
-            $userCounted = $stmt->fetch();
-            $stmt->execute();
+            $stmt->execute(); 
             $userCounted = $stmt->fetchColumn();
+                     
             return $userCounted;
             
         }
@@ -218,6 +218,42 @@
                 }
            
         }
+        }
+        public function countArticle(){
+            $conn = new DBConnection();           
+            $countArticleSql = "SELECT COUNT(baiviet.ma_bviet)  FROM `baiviet` ";
+            $stmt = $conn->getConnection()->prepare($countArticleSql);
+            $stmt->execute();
+            $articleCounted = $stmt->fetchColumn();           
+            return $articleCounted;
+            
+        }
+        public function countAuthor(){
+            $conn = new DBConnection();           
+            $countAuthorSql = "SELECT COUNT(tacgia.ma_tgia)  FROM `tacgia` ";
+            $stmt = $conn->getConnection()->prepare($countAuthorSql);
+            $stmt->execute();
+            $authorCounted = $stmt->fetchColumn();           
+            return $authorCounted;
+            
+        }
+        public function countCategory(){
+            $conn = new DBConnection();           
+            $countCategorySql = "SELECT COUNT(theloai.ma_tloai)  FROM `theloai` ";
+            $stmt = $conn->getConnection()->prepare($countCategorySql);
+            $stmt->execute();
+            $categoryCounted = $stmt->fetchColumn();           
+            return $categoryCounted;
+            
+        }
+
+        public function userLogOut(){            
+            session_start();
+            if(isset($_SESSION['user'])){
+                unset($_SESSION['user']);
+
+            }
+
         }
     }
 
