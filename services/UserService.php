@@ -36,21 +36,7 @@
     
               echo "OK";
             }
-            
-          
-          
-            
-          
-          
-          //Thực thi câu lệnh
-          
-              if(mysqli_query($conn,$addUserSql)){ //conn để kết nối csdl bên file ketnoi
-                  header("Location: user.php");
-                  // echo mysqli_query($conn,$addUserSql);
-                  echo "OK";
-              }
-            
-            
+         
          }
 
         public function selectEditUser(){
