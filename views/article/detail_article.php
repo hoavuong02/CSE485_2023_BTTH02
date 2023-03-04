@@ -14,7 +14,7 @@
                 <p class="card-text"><span class=" fw-bold">Thể loại: </span><?php echo $nameCategory->getten_tloai();?></p>
                 <p class="card-text"><span class=" fw-bold">Tóm tắt: </span><?php echo $detailArticle->getTomTat();?></p>
                 <p class="card-text"><span class=" fw-bold">Nội dung: </span><?php echo $detailArticle->getNoiDung();?></p>
-                <p class="card-text"><span class=" fw-bold">Tác giả: </span><?php echo "Author->getTenTacGia";?></p>
+                <p class="card-text"><span class=" fw-bold">Tác giả: </span><?php echo $nameAuthor->getTenTacGia();?></p>
 
             </div>          
         </div>

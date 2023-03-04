@@ -22,5 +22,29 @@ class ArticleController{
         include("views/article/search_article.php");
     }
 
+    public function list(){
+        $serviceDetail = new ArticleService();
+        $listArticles = $serviceDetail->getListArticles();
+        include("views/article/list_article.php");
+    }
+
+    public function edit(){
+        $serviceDetail = new ArticleService();
+        $detailArticle = $serviceDetail->getDetailArticle();
+        $nameCategory = $serviceDetail->getCategorybyArticle($detailArticle->getMaTheLoai());
+        $nameAuthor = $serviceDetail->getAuthorbyArticle($detailArticle->getMaTacGia());
+
+        $nameCategoryExcept = $serviceDetail->getALLCategoryExcept($detailArticle->getMaTheLoai());
+        $nameAuthorExcept = $serviceDetail->getAllAuthorExcept($detailArticle->getMaTacGia());
+        include("views/article/edit_article.php");
+    }
+
+    public function processEdit(){
+        $articleService = new ArticleService();
+        $processEdit = $articleService-> processEditArticle();
+        
+    }
+
     
+
 }
