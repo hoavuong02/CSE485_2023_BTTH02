@@ -99,8 +99,7 @@ class AuthorService{
         $sqlgetlinkImg2  = "SELECT hinhanh FROM baiviet WHERE ma_tgia = $getId "; 
         $resultlinkImg2 =  $conn->prepare($sqlgetlinkImg2);
         $resultlinkImg2->execute();
-        $row = $resultlinkImg2 -> fetch();
-        $pathImg2 = $upload_path1.$row['hinhanh'];
+        
         //.........................
         
         $delAuthorSql = "DELETE FROM tacgia WHERE ma_tgia = $getId";
@@ -140,10 +139,18 @@ class AuthorService{
                     $stmt4 = $conn->prepare($deleteAuthorSql);
                     $stmt4->execute();
 
-                    if (file_exists($pathImg) && file_exists($pathImg2)) {                       // If image file exists
+                    if (file_exists($pathImg)) {                       // If image file exists
                         $unlink = unlink($pathImg);                    // Delete image file
-                        $unlink2 = unlink($pathImg2);     
-                    }   
+                        
+                    }
+                    //xóa ảnh trong folder baiviet
+                    while($row = $resultlinkImg2 -> fetch()){
+
+                        $pathImg2 = $upload_path1.$row['hinhanh'];
+                        while(file_exists($pathImg2)){{
+                            $unlink2 = unlink($pathImg2);  
+                        }}
+                    }
 
                     header("Location: index.php?controller=author&success=Xóa Thành Công!");
         }
