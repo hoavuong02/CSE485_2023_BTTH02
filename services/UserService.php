@@ -222,14 +222,14 @@
                 </script> " ;
             }
             
-            // else{
-            //     $pushUserSql = "INSERT INTO user(ten_dnhap,mat_khau,email,ngay_dki) VALUES ('$txtUserNameSU','$txtUserPassSU','$txtEmailSU',current_timestamp())";
-            //     $stmt = $conn->getConnection()->prepare($pushUserSql);
-            //     if($stmt->execute()){
-            //         header("Location: index.php?controller=login&action=index");
-            //     }
+            else{
+                $pushUserSql = "INSERT INTO user(ten_dnhap,mat_khau,email,ngay_dki) VALUES ('$txtUserNameSU','$txtUserPassSU','$txtEmailSU',current_timestamp())";
+                $stmt = $conn->getConnection()->prepare($pushUserSql);
+                if($stmt->execute()){
+                    header("Location: index.php?controller=login&action=index");
+                }
                 
-            //     }
+                }
            
         }
         }
