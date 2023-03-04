@@ -41,10 +41,23 @@ class ArticleController{
 
     public function processEdit(){
         $articleService = new ArticleService();
-        $processEdit = $articleService-> processEditArticle();
-        
+        $processEdit = $articleService-> processEditArticle(); 
     }
 
+    public function delete(){
+        $articleService = new ArticleService();
+        $delete = $articleService-> deleteArticle(); 
+    }
     
+    public function add(){
+        $articleService = new ArticleService();
+        $categorys = $articleService->getAllCategory();
+        $authors = $articleService->getAllAuthor();
+        include("views/article/add_article.php");
+    }
 
+    public function processAdd(){
+        $articleService = new ArticleService();
+        $processAdd = $articleService-> addArticle();
+    }
 }

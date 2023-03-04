@@ -132,13 +132,19 @@ class ArticleService{
         return $articles;
     }
 
-    public function addArticle($tieude, $ten_bhat, $ma_tloai, $tomtat, $noidung, $ma_thloai, $ma_tgia){
+    public function addArticle(){
         $dbConn = new DBConnection();
         $conn = $dbConn->getConnection();
 
+        $tieude = $_POST['tieude'];
+        $ten_bhat = $_POST['ten_bhat'];
+        $ma_tloai = $_POST['the_loai'];
+        $tomtat = $_POST['tomtat'];
+        $noidung = $_POST['noidung'];
+        $ma_tgia = $_POST['tac_gia'];
         
         $upload_path   = APP_ROOT.'/assets/images/songs/';
-
+        $db_path_uncompleted = '/images/songs/';
         function create_filename($filename, $upload_path)              // Function to make filename
         {
             $basename   = pathinfo($filename, PATHINFO_FILENAME);      // Get basename
@@ -158,21 +164,24 @@ class ArticleService{
             $filename    = create_filename($_FILES['hinhanh']['name'], $upload_path);
 
             $destination = $upload_path . $filename;
+            $db_path_completed =  $db_path_uncompleted . $filename;
             $moved       = move_uploaded_file($_FILES['hinhanh']['tmp_name'], $destination);
         
         }
 
 
-        $sql = "INSERT INTO `baiviet` (`ma_bviet`, `tieude`, `ten_bhat`, `ma_tloai`, `tomtat`, `noidung`, `ma_tgia`, `ngayviet`, `hinhanh`)
-           VALUES (NULL, '$tieude', '$ten_bhat', '$ma_tloai', '$tomtat', '$noidung', '$ma_tgia', current_timestamp(), '$destination')";
-        $stmt = $dbConn->getConnect()->prepare($sql);
+        $addArticleSql = "INSERT INTO `baiviet` (`ma_bviet`, `tieude`, `ten_bhat`, `ma_tloai`, `tomtat`, `noidung`, `ma_tgia`, `ngayviet`, `hinhanh`)
+           VALUES (NULL, '$tieude', '$ten_bhat', '$ma_tloai', '$tomtat', '$noidung', '$ma_tgia', current_timestamp(), '$db_path_completed')";
+        $stmt = $conn->prepare($addArticleSql);
         $stmt->execute();
-        
+        if($stmt->execute()){
+            header("Location: index.php?controller=article&action=list");
+        }
     }
 
     public function processEditArticle(){
         $upload_path   = APP_ROOT.'/assets/images/songs/';
-
+        $db_path_uncompleted = '/images/songs/';
         function create_filename($filename, $upload_path)              // Function to make filename
         {
             $basename   = pathinfo($filename, PATHINFO_FILENAME);      // Get basename
@@ -192,6 +201,7 @@ class ArticleService{
             $filename    = create_filename($_FILES['hinhanh']['name'], $upload_path);
 
             $destination = $upload_path . $filename;
+            $db_path_completed =  $db_path_uncompleted . $filename;
             $moved       = move_uploaded_file($_FILES['hinhanh']['tmp_name'], $destination);
         
         }
@@ -209,7 +219,7 @@ class ArticleService{
         $ma_tgia = $_POST['tac_gia'];  
         
         $updateArticleSql = "UPDATE baiviet SET tieude = '$tieude', ten_bhat = '$ten_bhat', ma_tloai = '$ma_tloai', tomtat = '$tomtat', noidung = '$noidung'
-        , ma_tgia = '$ma_tgia', ngayviet = current_timestamp(), hinhanh = '$destination'
+        , ma_tgia = '$ma_tgia', ngayviet = current_timestamp(), hinhanh = '$db_path_completed'
         where ma_bviet = '$ma_bviet'" ;
 
         $stmt = $conn->prepare($updateArticleSql);
@@ -217,8 +227,54 @@ class ArticleService{
         if($stmt->execute()){
             header("Location: index.php?controller=article&action=list");
         }
-
-        
-        
      }
+
+     public function deleteArticle(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+
+        $getId = $_GET['id'];
+        $deleteArticleSql = "DELETE FROM baiviet WHERE ma_bviet = '$getId'  ";
+        $stmt = $conn->prepare( $deleteArticleSql);
+        $stmt->execute();
+        // Bước 03: Trả về dữ liệu
+        if($stmt->execute()){
+            header("Location: index.php?controller=article&action=list");
+        }
+        
+    }
+
+    public function getAllCategory(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+
+        $sql = "SELECT * FROM theloai";
+        $stmt = $conn->query($sql);
+
+        $categorys = [];
+        while($row = $stmt->fetch()){
+            $category = new Category($row['ma_tloai'], $row['ten_tloai']);
+            array_push($categorys, $category);
+        }
+        // Mảng (danh sách) các đối tượng Article Model
+
+        return $categorys;
+    }
+
+    public function getAllAuthor(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+
+        $sql = "SELECT * FROM tacgia";
+        $stmt = $conn->query($sql);
+
+        $authors = [];
+        while($row = $stmt->fetch()){
+            $author = new Author($row['ma_tgia'], $row['ten_tgia'], $row['hinh_tgia']);
+            array_push($authors, $author);
+        }
+        // Mảng (danh sách) các đối tượng Article Model
+
+        return $authors;
+    }
 }
