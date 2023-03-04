@@ -20,7 +20,7 @@
 
                     <div class="input-group mt-3 mb-3">
                         <span class="input-group-text" id="lblAuthName">Đường dẫn cũ</span>
-                        <input type="text" class="form-control filetg" name="txtAuthFile" readonly value = "<?= $editAuthorId->getHinhTacGia(); ?>">
+                        <input type="text" class="form-control filetg" name="txtAuthFileOld" readonly value = "<?= $editAuthorId->getHinhTacGia(); ?>">
                     </div>
 
                     <div class="input-group mt-3 mb-3">

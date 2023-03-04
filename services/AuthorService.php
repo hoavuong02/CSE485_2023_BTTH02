@@ -231,6 +231,14 @@ class AuthorService{
 
         $stmt = $conn->prepare($updateAuthSql);
         $stmt->execute();
+
+        //xóa ảnh cũ khi sửa
+        $upload_path1 = 'assets/';
+        $linkOld = $_POST['txtAuthFileOld'];
+        $pathImg = $upload_path1.$linkOld;
+        if (file_exists($pathImg)) {                       // If image file exists
+            $unlink = unlink($pathImg);                    // Delete image file
+        }   
     }
 
 
