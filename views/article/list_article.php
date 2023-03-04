@@ -7,7 +7,7 @@
         <!-- <h3 class="text-center text-uppercase mb-3 text-primary">CẢM NHẬN VỀ BÀI HÁT</h3> -->
         <div class="row">
             <div class="col-sm">
-                <a href="add_article.php" class="btn btn-success">Thêm mới</a>
+                <a href="index.php?controller=article&action=add" class="btn btn-success">Thêm mới</a>
                 <table class="table">
                     <thead>
                         <tr>
@@ -34,7 +34,7 @@
                                 <a href="index.php?controller=article&action=edit&id=<?=$listArticle->getMaBaiViet()?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             </td>
                             <td>
-                                <a onclick = "return confirm('Bạn có chắc chắn muốn xóa Thể Loại này?');"  href="delete_article.php?id=<?=$row['ma_bviet'] ?>" > <i class="fa-solid fa-trash"></i> </a>
+                                <a onclick = "return confirm('Bạn có chắc chắn muốn xóa bài viết này?');"  href="index.php?controller=article&action=delete&id=<?=$listArticle->getMaBaiViet() ?>" > <i class="fa-solid fa-trash"></i> </a>
                             </td>
                         </tr>
 
