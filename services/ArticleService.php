@@ -180,6 +180,18 @@ class ArticleService{
     }
 
     public function processEditArticle(){
+        $dbConn = new DBConnection();
+        $conn = $dbConn->getConnection();
+
+        $ma_bviet = $_POST['ma_bviet'];
+        $tieude = $_POST['tieude'];
+        $ten_bhat = $_POST['ten_bhat'];
+        $ma_tloai = $_POST['the_loai'];
+        $tomtat = $_POST['tomtat'];     
+        $noidung = $_POST['noidung']; 
+        $ma_tgia = $_POST['tac_gia'];  
+
+
         $upload_path   = APP_ROOT.'/assets/images/songs/';
         $db_path_uncompleted = '/images/songs/';
         function create_filename($filename, $upload_path)              // Function to make filename
@@ -206,23 +218,28 @@ class ArticleService{
         
         }
 
+        //xoa anh trong folder
+        $upload_path1 = 'assets/';
+        $sqlgetlinkImg  = "SELECT hinhanh FROM baiviet WHERE ma_bviet = $ma_bviet "; 
+        $resultlinkImg =  $conn->prepare($sqlgetlinkImg);
+        $resultlinkImg->execute();
+        $row = $resultlinkImg -> fetch();
+        $pathImg = $upload_path1.$row['hinhanh'];
 
-        $dbConn = new DBConnection();
-        $conn = $dbConn->getConnection();
+ 
+        //end
 
-        $ma_bviet = $_POST['ma_bviet'];
-        $tieude = $_POST['tieude'];
-        $ten_bhat = $_POST['ten_bhat'];
-        $ma_tloai = $_POST['the_loai'];
-        $tomtat = $_POST['tomtat'];     
-        $noidung = $_POST['noidung']; 
-        $ma_tgia = $_POST['tac_gia'];  
+
+        
         
         $updateArticleSql = "UPDATE baiviet SET tieude = '$tieude', ten_bhat = '$ten_bhat', ma_tloai = '$ma_tloai', tomtat = '$tomtat', noidung = '$noidung'
         , ma_tgia = '$ma_tgia', ngayviet = current_timestamp(), hinhanh = '$db_path_completed'
         where ma_bviet = '$ma_bviet'" ;
 
         $stmt = $conn->prepare($updateArticleSql);
+        if (file_exists($pathImg)) {                       // If image file exists
+            $unlink = unlink($pathImg);                    // Delete image file
+        }
         $stmt->execute();
         if($stmt->execute()){
             header("Location: index.php?controller=article&action=list");
@@ -234,9 +251,25 @@ class ArticleService{
         $conn = $dbConn->getConnection();
 
         $getId = $_GET['id'];
+        //xoa anh trong folder
+
+        $upload_path1 = 'assets/';
+        $sqlgetlinkImg  = "SELECT hinhanh FROM baiviet WHERE ma_bviet = $getId "; 
+        $resultlinkImg =  $conn->prepare($sqlgetlinkImg);
+        $resultlinkImg->execute();
+        $row = $resultlinkImg -> fetch();
+        $pathImg = $upload_path1.$row['hinhanh'];
+
+        //end
+
+        
         $deleteArticleSql = "DELETE FROM baiviet WHERE ma_bviet = '$getId'  ";
         $stmt = $conn->prepare( $deleteArticleSql);
         $stmt->execute();
+
+        if (file_exists($pathImg)) {                       // If image file exists
+            $unlink = unlink($pathImg);                    // Delete image file
+        }
         // Bước 03: Trả về dữ liệu
         if($stmt->execute()){
             header("Location: index.php?controller=article&action=list");
